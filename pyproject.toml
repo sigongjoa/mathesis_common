@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mathesis-core"
+version = "0.1.0"
+description = "Common core modules for Mathesis system"
+requires-python = ">=3.10"
+dependencies = [
+    "ollama>=0.1.0",
+    "httpx>=0.24.0",
+    "pydantic>=2.0.0",
+    "grpcio>=1.50.0",
+    "protobuf>=4.21.0",
+    "mcp>=0.1.0",
+    "tenacity>=8.0.0",
+    "chromadb>=0.4.0",
+    "rank_bm25>=0.2.2",
+    "matplotlib>=3.7.0",
+    "python-pptx>=0.6.23"
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.20.0",
+    "pytest-mock>=3.10.0"
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
