@@ -120,3 +120,35 @@ class SchoolReportGenerator:
         except Exception as e:
             logger.error(f"Failed to generate report: {e}")
             raise ExportException(f"Typst generation failed: {e}")
+
+class GenericTypstPDFGenerator:
+    """
+    Generic generator for any Typst template.
+    """
+    def __init__(self):
+        from mathesis_core.export.typst_wrapper import TypstGenerator
+        self.typst_gen = TypstGenerator()
+
+    async def generate(self, template_path: str, data: Dict[str, Any], output_path: str) -> str:
+        """
+        Generates a PDF from a given .typ template and data dictionary.
+        Returns the path to the generated PDF.
+        """
+        import os
+        try:
+            # Basic validation
+            if not os.path.exists(template_path):
+                raise FileNotFoundError(f"Template not found: {template_path}")
+
+            # Execute compilation
+            # The wrapper handles JSON serialization of data
+            self.typst_gen.compile(template_path, data, output_path)
+            
+            if not os.path.exists(output_path):
+                raise ExportException("PDF output not generated")
+                
+            return output_path
+
+        except Exception as e:
+            logger.error(f"Generic PDF Generation failed: {e}")
+            raise ExportException(f"PDF Generation failed: {e}")

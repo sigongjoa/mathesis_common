@@ -34,3 +34,34 @@ class RAGException(MathesisBaseException):
 class ExportException(MathesisBaseException):
     """Base exception for Export/Report errors"""
     pass
+
+
+# Module-specific exceptions
+class MathesisCoreError(MathesisBaseException):
+    """Base exception for mathesis-core modules."""
+    pass
+
+
+class OCRError(MathesisCoreError):
+    """OCR extraction failed."""
+    pass
+
+
+class AnalysisError(MathesisCoreError):
+    """DNA analysis failed."""
+    pass
+
+
+class GenerationError(MathesisCoreError):
+    """Problem generation failed."""
+    pass
+
+
+class LLMTimeoutError(MathesisCoreError):
+    """LLM request timed out."""
+    pass
+
+
+class WorkflowError(MathesisCoreError):
+    """Workflow execution failed."""
+    pass
